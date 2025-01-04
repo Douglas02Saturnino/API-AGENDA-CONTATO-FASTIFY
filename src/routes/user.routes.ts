@@ -3,10 +3,10 @@ import { UserUseCase } from "../usecases/user.usecase";
 import { UserCreate } from "../interfaces/user.interface";
 
 export async function userRoutes(fastify: FastifyInstance){
-    fastify.post<{Body: UserCreate}>('/', (req, reply) =>{
+    fastify.post<{Body: UserCreate}>('/', async (req, reply) =>{
         const {name , email} = req.body
         try{
-            const data = UserUseCase.create({
+            const data = await UserUseCase.create({
                 name,
                 email
             });
